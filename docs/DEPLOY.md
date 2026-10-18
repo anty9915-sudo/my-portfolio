@@ -16,9 +16,11 @@
 | 파일 | 역할 |
 | --- | --- |
 | `render.yaml` | Render Blueprint. 서비스 이름 `my-portfolio-api`, `backend/`를 `npm ci --omit=dev` → `npm start`로 실행 |
-| `frontend/vercel.json` | `/api/*` → `https://my-portfolio-api.onrender.com/api/*` 프록시, 나머지 경로는 `index.html`(SPA) |
+| `frontend/vercel.json` | `/api/*` → `https://my-portfolio-api-d02n.onrender.com/api/*` 프록시, 나머지 경로는 `index.html`(SPA) |
 
-> Render 서비스 이름이 바뀌면(이미 사용 중이라 다른 주소가 배정되는 등) `frontend/vercel.json`의 주소도 같이 바꿔야 한다.
+> Render는 `my-portfolio-api`가 이미 사용 중이라 `my-portfolio-api-d02n.onrender.com`을 배정했다. Render 주소가 바뀌면 `frontend/vercel.json`도 같이 바꿔야 한다.
+>
+> 운영 주소 (2026-10-18): 사이트 `https://my-portfolio-delta-smoky-21.vercel.app`, API `https://my-portfolio-api-d02n.onrender.com`
 
 ## 2. 환경변수 (Render)
 
@@ -37,7 +39,7 @@
 ## 3. 순서
 
 1. **Atlas:** DB 사용자 비밀번호 교체 → Network Access에 `0.0.0.0/0` 추가 (Render 무료 플랜은 고정 IP가 없음). 로컬 `backend/.env`의 `MONGODB_URI`도 새 비밀번호로 바꾼다.
-2. **Render:** New → Blueprint → GitHub 저장소 `my-portfolio` 선택 → `MONGODB_URI` 입력 (`CLIENT_ORIGIN`은 임시로 `https://example.com`) → 배포 → `https://my-portfolio-api.onrender.com/api/v1/health`가 `{"status":"ok","database":"up"}`인지 확인.
+2. **Render:** New → Blueprint → GitHub 저장소 `my-portfolio` 선택 → `MONGODB_URI` 입력 (`CLIENT_ORIGIN`은 임시로 `https://example.com`) → 배포 → `https://<Render 주소>/api/v1/health`가 `{"status":"ok","database":"up"}`인지 확인.
 3. **Vercel:** Add New → Project → 저장소 `my-portfolio` → **Root Directory `frontend`** (Framework: Vite) → Deploy → 배정된 주소 확인.
 4. **Render:** `CLIENT_ORIGIN`을 Vercel 주소로 바꾸고 저장(자동 재시작).
 5. **확인:** Vercel 주소에서 메인 화면, `/api/v1/health`, 관리자 로그인, 문의 전송, 관리자 문의·통계 화면.
