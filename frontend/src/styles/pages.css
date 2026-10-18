@@ -1,0 +1,102 @@
+/* 하위 페이지 — 404 · 프로젝트 상세 · 학습 기록 (docs/img/03, 11) */
+
+/* ---------- 404 ---------- */
+.not-found {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: max(100svh, 680px);
+  padding: calc(var(--header-h) + 40px) 0 80px;
+  overflow: hidden;
+  isolation: isolate;
+  text-align: center;
+}
+
+.not-found__bg {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-size: cover;
+  background-position: center;
+  filter: blur(2px) saturate(0.9);
+  transform: scale(1.04);
+}
+
+.not-found__bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(60% 50% at 50% 45%, rgba(40, 18, 40, 0.55), rgba(5, 7, 15, 0.85) 75%),
+    linear-gradient(180deg, rgba(5, 7, 15, 0.4), var(--ink));
+}
+
+.not-found__inner {
+  display: grid;
+  justify-items: center;
+}
+
+.not-found__code {
+  margin: 8px 0 0;
+  color: var(--tx-hi);
+  font-family: var(--font-serif);
+  font-size: 168px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  text-shadow: 0 10px 50px rgba(255, 143, 184, 0.25);
+}
+
+.not-found__title {
+  margin: 30px 0 0;
+  color: var(--tx-hi);
+  font-family: var(--font-serif);
+  font-size: 34px;
+  font-weight: 700;
+  line-height: 1.4;
+  word-break: keep-all;
+}
+
+.not-found__body {
+  margin: 24px 0 0;
+  color: var(--tx-mid);
+  font-size: 16px;
+  line-height: 1.9;
+  white-space: pre-line;
+}
+
+.not-found__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 36px;
+}
+
+.not-found__path {
+  margin: 18px 0 0;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: rgba(126, 137, 180, 0.6);
+  word-break: break-all;
+}
+
+@media (max-width: 767px) {
+  .not-found__code {
+    font-size: 96px;
+  }
+
+  .not-found__title {
+    font-size: 22px;
+  }
+
+  .not-found__body {
+    font-size: 14px;
+  }
+
+  .not-found__actions {
+    display: grid;
+    width: 100%;
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "name": "portfolio-backend",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Developer portfolio REST API (Express + MongoDB Atlas + Mongoose)",
+  "type": "module",
+  "main": "src/server.js",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "node --watch --env-file=.env src/server.js",
+    "start": "node src/server.js",
+    "test": "node --test \"test/**/*.test.js\"",
+    "test:unit": "node --test \"test/unit/**/*.test.js\"",
+    "test:integration": "node --test \"test/integration/**/*.test.js\"",
+    "admin:create": "node --env-file=.env scripts/create-admin.js",
+    "db:sync-indexes": "node --env-file=.env scripts/sync-indexes.js"
+  },
+  "dependencies": {
+    "argon2": "^0.45.1",
+    "connect-mongo": "^6.0.0",
+    "cors": "^2.8.6",
+    "express": "^5.3.0",
+    "express-rate-limit": "^8.7.1",
+    "express-session": "^1.19.0",
+    "helmet": "^8.3.0",
+    "mongoose": "^9.11.2",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "mongodb-memory-server": "^11.3.0",
+    "supertest": "^7.3.1"
+  }
+}
