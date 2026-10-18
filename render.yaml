@@ -1,0 +1,30 @@
+# Render Blueprint — 백엔드 API (docs/DEPLOY.md)
+# 비밀값 세 개는 Render가 생성한다(generateValue). MONGODB_URI·CLIENT_ORIGIN은 Render 화면에서 직접 입력한다(sync: false).
+services:
+  - type: web
+    name: my-portfolio-api
+    runtime: node
+    plan: free
+    rootDir: backend
+    # 개발 의존성(mongodb-memory-server 등)은 설치하지 않는다
+    buildCommand: npm ci --omit=dev
+    startCommand: npm start
+    healthCheckPath: /api/v1/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: NODE_VERSION
+        value: 24.16.0
+      # 브라우저 → Vercel(프록시) → Render(프록시) → 앱: 두 단계를 신뢰해야 실제 방문자 IP와 https를 인식한다
+      - key: TRUST_PROXY
+        value: "2"
+      - key: MONGODB_URI
+        sync: false
+      - key: CLIENT_ORIGIN
+        sync: false
+      - key: SESSION_SECRET
+        generateValue: true
+      - key: VISIT_HASH_SECRET
+        generateValue: true
+      - key: FORM_TOKEN_SECRET
+        generateValue: true
